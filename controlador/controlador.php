@@ -26,10 +26,14 @@
         }
         
         case 4:{
+            unset($_SESSION['fecha']);
             unset($_SESSION['data']);
+            unset($_SESSION['distrito']);
             $cod=$_POST['coddistrito'];
-            $fechaIni=2023;/*$_POST['fechaini'];*/
-            $fechaFin=2029;/*$_POST['fechafin'];*/
+            $fecha = $_POST['fecha'];
+            $arr = explode('-', $fecha);
+            $fechaIni=$arr[0];
+            $fechaFin=$arr[1];
             $lista = array();
             $objDao = new ClaseDao();
             for ($i=intval($fechaIni); $i<=intval($fechaFin)  ; $i++) {
@@ -48,7 +52,9 @@
                     array_push($lista,$datapredicion);*/
                 }
             }
-            //para el tamaño de un array sizeof(array());
+            $distrito = new ClaseDao();
+            $_SESSION['distrito'] = $distrito->distrito($cod);
+            $_SESSION['fecha'] = $fecha;
             $_SESSION['data'] = json_encode($lista);
             header("Location: ../Prediccion.php");
             break;

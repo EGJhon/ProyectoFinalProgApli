@@ -76,6 +76,32 @@ class ClaseDao {
             return NULL;
         }
     }
+
+    public function distrito($coddistri) {
+        try {
+            // Crear una instancia de la clase de conexión
+            $conexionBD = new ConexionBD();
+            
+            // Obtener la conexión
+            $conexion = $conexionBD->getConexion();
+
+            // Preparar la consulta SQL parametrizada
+            $sql = "SELECT * FROM distritos WHERE coddistri = :coddistri ";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':coddistri', $coddistri, PDO::PARAM_INT);
+
+            // Ejecutar la consulta
+            $stmt->execute();
+
+            // Obtener los resultados
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //el resultado es una matriz
+            return $result;
+        } catch (PDOException $e) {
+            // Manejar la excepción de conexión aquí
+            return NULL;
+        }
+    }
     
 }
 /*

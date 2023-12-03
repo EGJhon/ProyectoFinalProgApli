@@ -11,6 +11,11 @@
     <title>Sistema Equipo 1</title>
     <script src="./js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
 <!--JQUERY-->
     <script>
       
@@ -24,14 +29,27 @@
         document.form.action="controlador/controlador.php"
         document.form.method="POST";
         document.form.op.value="4";
+
         document.form.submit();
       }
     </script>
-
-
-    <link rel="stylesheet" href="./styles/styles.css">
     <script>
-    </script>
+      $(function() {
+          $("#slider-range").slider({
+              range: true,
+              min: 2021,
+              max: 2050,
+              values: [2023, 2029],
+              slide: function(event, ui) {
+                  $("#amount").val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+              }
+          });
+
+          $( "#amount" ).val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider( "values", 1) );
+      });
+</script>
+
+<link rel="stylesheet" href="./styles/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!--IMPORTANCIÓN CHARTJS-->
@@ -125,9 +143,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
             <div class="row">
                 <div class="col">
                     <div class="m-3">
-                        <label for="range1" class="form-label"> Range </label>
+                        <!--<label for="range1" class="form-label"> Range </label>
                         <input type="range"  class="form-range" id="range1" min="2022" max="2050" >
-                        <input type="range"  class="form-range" id="range2" min="2022" max="2050" >
+                        <input type="range"  class="form-range" id="range2" min="2022" max="2050" > -->
+
+                        <p>
+                        <label for="amount">Rango de Años:</label>
+                        <input type="text" name="fecha" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+                        </p>
+                        <div id="slider-range" style="width:300px;"></div>
                     </div>
                 </div>
             </div>
@@ -206,7 +230,7 @@ new Chart("myChart", {
 <!--FOOTER-->
 <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
     <div class="container text-center">
-      <small>Creado por el equipo 01</small>
+      <small>Creado por el equipo 01 - </small>
       <small>Universidad nacional Federico Villarreal</small>
     </div>
 </footer>
