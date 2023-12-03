@@ -161,21 +161,6 @@
   </div>
 </div>
 
-
-
-<br>
-<div class="container">
-
-</div>
-
-<!--AÑADIR IMAGEN-->
-<div class="d-flex justify-content-center">
-
-<img id="imagenDistrito" src="" alt="Imagen del distrito" style="width: 50%; height=auto">
-
-</div>
-
-
 <!--FOOTER-->
 <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
     <div class="container text-center">
