@@ -47,25 +47,21 @@
 
           $( "#amount" ).val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider( "values", 1) );
       });
-</script>
+    </script>
 
 <link rel="stylesheet" href="./styles/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!--IMPORTANCIÓN CHARTJS-->
-
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
 
 </head>
+
 <body>
 
 <!--BARRA DE NAVEGACIÓN-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="index.php">
     <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Bootstrap
+    
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -87,10 +83,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     </ul>
   </div>
 </nav>
-
-
-
-
 
 <section class="rojo">
 <div class="titulo">
@@ -122,13 +114,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <label for="distrito" placeholder="Escoger distrito"></label>
 
         <select name="coddistrito" id="distrito" class="form-select">
-          <!--
-        <option value="" placeholder="Escoger distrito">Ecoger un distrito</option>
-        <option value="images/Ate.png">Ate</option>
-        <option value="images/SJL.png">San Juan de Lurigancho</option>
-        <option value="images/La_Victoria.png">La Victoria</option>
-        <option value="images/Chorrillos.png">Chorrillos</option>
-          -->
           <option value="0">-Seleccionar Distrito-</option>
           <?php foreach ($listaDistritos as $reg) { ?>
 
@@ -143,10 +128,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
             <div class="row">
                 <div class="col">
                     <div class="m-3">
-                        <!--<label for="range1" class="form-label"> Range </label>
-                        <input type="range"  class="form-range" id="range1" min="2022" max="2050" >
-                        <input type="range"  class="form-range" id="range2" min="2022" max="2050" > -->
-
                         <p>
                         <label for="amount">Rango de Años:</label>
                         <input type="text" name="fecha" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
@@ -193,38 +174,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <img id="imagenDistrito" src="" alt="Imagen del distrito" style="width: 50%; height=auto">
 
 </div>
-
-<!--ChartJS-->
-<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-
-<!--
-
-<script>
-    const xValues = [100,200,300,400,500,600,700,800,900,1000];
-
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-      borderColor: "red",
-      fill: false
-    },{
-      data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
-      borderColor: "green",
-      fill: false
-    },{
-      data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
-      borderColor: "blue",
-      fill: true
-    }]
-  },
-  options: {
-    legend: {display: true}
-  }
-});
-</script> -->
 
 
 <!--FOOTER-->

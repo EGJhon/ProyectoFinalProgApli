@@ -25,17 +25,33 @@
         var selectedValue = $(this).val();
         $("#imagenDistrito").attr("src", selectedValue);
       });
+      $("#inicio").click(function(){
+        $("#form").attr('action','controlador/controlador.php');
+        $("#form").attr('method','POST');
+        $('input[name=op]').val('5');
+        $("#form").submit();
+      });
+      $("#predic").click(function(){
+        $("#form").attr('action','controlador/controlador.php');
+        $("#form").attr('method','POST');
+        $('input[name=op]').val('3');
+        $("#form").submit();
+      });
     });
+
+
     </script>
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
 <body>
-
+<form id="form">
+  <input type="hidden" name="op">
+</form>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="index.php">
     <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Bootstrap
+    
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -58,24 +74,19 @@
   </div>
 </nav>
 
-
-
-
-
-
-    <!--ChartJS-->
-    <?php 
-        echo '
-        <section class="rojo">
+<section class="rojo">
         <div class="titulo">
           <div class="container">
             <center>
-              <h1>Predicion del Distrito de '.$nombreDistrito.' del año '.$fechaIni.' - '.$fechaFin.'</h1>
+              <h1>Predicion del Distrito de <?php echo $nombreDistrito?> del año <?php echo $fechaIni ?> - <?php echo  $fechaFin ?></h1>
             </center>
           </div>
         </div>
         </section>  
           <canvas class="container center py-4" id="myChart" style="width:100%;max-width:700px"></canvas>
+    <!--ChartJS-->
+    <?php 
+        echo '
           <script>
             years =new Array();
             for (i =parseInt('.$fechaIni.') ; i <= parseInt('.$fechaFin.'); i++) {
@@ -100,6 +111,13 @@
           });
           </script>'
         ?> 
+
+        <div class="container py-5">
+          <center>
+          <button type="button" id="inicio" class="btn btn-primary mx-2">Regresar a inicio</button>
+          <button type="button" id="predic" class="btn btn-success mx-2">Nueva predicción</button>  
+          </center>
+        </div>
 <!--FOOTER-->
 <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
     <div class="container text-center">

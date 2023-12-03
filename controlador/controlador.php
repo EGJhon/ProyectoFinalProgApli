@@ -59,9 +59,8 @@
             header("Location: ../Prediccion.php");
             break;
         }
-    /*------------------------------------Modelo Detector--------------------------------------------------------*/
         case 5:{
-            
+            header("Location: ../index.php");
             break;
         }
     }
