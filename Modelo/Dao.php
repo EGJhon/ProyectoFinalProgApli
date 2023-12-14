@@ -16,7 +16,7 @@ class ClaseDao {
             // Asignar valores a las variables
             $coddistrito = $obj->getCODDISTRITO();
             $years = $obj->getYEARS();
-            $predicion = $obj->getPREDICION();
+            $predicion = $obj->getPREDICCION();
     
             $stmt->bindParam(':coddistrito', $coddistrito);
             $stmt->bindParam(':years', $years);

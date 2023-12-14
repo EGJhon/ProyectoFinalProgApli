@@ -4,6 +4,14 @@
     require_once '../Modelo/Dao.php';
     require_once '../util/ConexionBD.php';
     $op=$_POST['op'];
+        
+    function prediccion($year,$dist){
+        $pythonScript = 'C:\Users\JHON\Documents\GitHub\ProyectoFinalProgApli\RedNeuronal\Prediccion.py';
+        $command = "python $pythonScript $year $dist";
+        $residuo = shell_exec($command);
+
+        return floatval($residuo);
+    }
 
     switch ($op){
         case 1:{
@@ -37,19 +45,19 @@
             $lista = array();
             $objDao = new ClaseDao();
             for ($i=intval($fechaIni); $i<=intval($fechaFin)  ; $i++) {
-                $datapredicion=$objDao->Buscar($cod,$i)[0]['Prediccion'];
+                $datapredicion=$objDao->Buscar($cod,$i);
                 if( $datapredicion != NULL){
-                    array_push($lista,$datapredicion); 
+                    array_push($lista,$datapredicion[0]['Prediccion']); 
                 } 
                 else{
-                    /*
-                    $datapredicion=funcionpredicion($cod,$i);
+                    
+                    $datapredicion=prediccion($i,$cod);
                     $obj = new Bean();
-                    $obj->getCODDISTRITO($cod);
+                    $obj->setCODDISTRITO($cod);
                     $obj->setYEARS($i);
                     $obj->setPREDICCION($datapredicion);
-                    $obj->InsertarData($obj);
-                    array_push($lista,$datapredicion);*/
+                    $objDao->InsertarData($obj);
+                    array_push($lista,$datapredicion);
                 }
             }
             $distrito = new ClaseDao();

@@ -3,7 +3,7 @@ class Bean {
     public $CODIGO ;
     public $CODDISTRITO;
     public $AÑO ;
-    public $PREDICION;
+    public $PREDICCION;
 
 
     public function getCODIGO() {
@@ -31,11 +31,11 @@ class Bean {
     }
 
     public function getPREDICCION() {
-        return $this->PREDICION;
+        return $this->PREDICCION;
     }
 
-    public function setPREDICCION($PREDICION) {
-        $this->PREDICION = $PREDICION;
+    public function setPREDICCION($PREDICCION) {
+        $this->PREDICCION = $PREDICCION;
     }
     
 }

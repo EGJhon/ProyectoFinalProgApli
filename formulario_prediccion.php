@@ -37,7 +37,7 @@
       $(function() {
           $("#slider-range").slider({
               range: true,
-              min: 2021,
+              min: 2003,
               max: 2050,
               values: [2023, 2029],
               slide: function(event, ui) {
