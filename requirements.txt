@@ -1,3 +1,4 @@
+-python =<3.11.7
 -Tesorflow
 -mysql-connector-python
 -numpy
