@@ -26,6 +26,28 @@
             $('input[name=op]').val('1');
             $("#form").submit();
         });
+        $("#crear-usr").click(function(){  
+            $.ajax({
+              url:"controlador/controlador.php",
+              type:"POST",
+              data: "op=6",
+              success: function(datos){
+                $("body").html(datos);
+                $("#contenedor1").html("");
+              }
+            });
+        });
+        $("#crear-usr").click(function(){  
+            $.ajax({
+              url:"controlador/controlador.php",
+              type:"POST",
+              data: "op=6",
+              success: function(datos){
+                $("body").html(datos);
+                $("#contenedor1").html("");
+              }
+            });
+        });
       });
     </script>
     <link rel="stylesheet" href="./styles/styles.css">
@@ -44,14 +66,16 @@
 <div class="container text-center">
 <h1 class="gigante">PREDICCIÓN DE RESIDUOS SÓLIDOS</h1>
 </div>
-<div class="container text-center">
+<div id= "contenedor1" class="container text-center">
   <br>
-<button id="btn_iniciar" type="button" class="btn btn-primary">iniciar ahora</button>
+<button id="btn_iniciar" type="button" class="btn btn-primary">iniciar Sesión</button>
+<br>
+<button id="crear-usr" type="button" class="btn btn-primary my-3">Crear Usuario</button>
 <form id=form>
   <input type="hidden" name="op">
 </form>
 </div>
-
+<div id="contenedor"></div>
 <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
     <div class="container text-center">
       <small>Creado por el equipo 01 - </small>

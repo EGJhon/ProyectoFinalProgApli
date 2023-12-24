@@ -23,6 +23,65 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "RedNeuronal/ModeloClasificador/my_model/";
+
+    let model, webcam, labelContainer, maxPredictions;
+
+    // Load the image model and setup the webcam
+    async function iniciar() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // or files from your local hard drive
+        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const flip = true; // whether to flip the webcam
+        webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // append elements to the DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
+
+    async function loop() {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    // run the webcam image through the image model
+    async function predict() {
+        // predict can take in an image, video or canvas html element
+        const prediction = await model.predict(webcam.canvas);
+        let classPrediction='<table class="table-primary table-bordered"><thead><tr><th scope="col">Tipo</th><th scope="col">Porcentaje</th></tr></thead><tbody>';
+        for (let i = 0; i < maxPredictions; i++) {
+            classPrediction = classPrediction + "<tr><th>"+prediction[i].className+ "</th><td>" + (prediction[i].probability.toFixed(1) *100 )+"%  </td></tr>";
+        }
+        classPrediction = classPrediction +'</tbody></table>';
+        labelContainer.innerHTML = classPrediction  ;
+        
+    }
+</script>
+
+
 </head>
 <body>
 
@@ -76,19 +135,26 @@
 
 <!--BOTÓN-->
 <div class="container-sm">
-<input type="button" class="btn btn-primary" onclick="mensaje()" VALUE="PRESIONAR">
-<input type="text" placeholder="Ingresar distrito">
+<input type="button" class="btn btn-primary" onclick="iniciar()" VALUE="Comenzar">
+<!--<input type="text" placeholder="Ingresar distrito">-->
 </div>
 <br>
 
 <!--UPLOAD IMAGE-->
 <div class="container-sm">
+  <!--
     <form action="upload.php" method="post" enctype="multipart/form-data">
         <label for="fileToUpload">Cargar una imágen</label>
         <input type="file" name="fileToUpload" id="fileToUpload">
     </form>
-    <img id="previewImage" src="#" alt="Preview Image" style="display:none;">
-    <div id="texto"></div>
+    <!--<img id="previewImage" src="#" alt="Preview Image" style="display:none;">-->
+    <!--<div id="texto"></div>-->
+    <div class="d-flex justify-content-center">
+      <div id="webcam-container"></div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div id="label-container"></div>
+    </div>
 </div>
 
 <script>
@@ -120,7 +186,7 @@
 </footer>
 
 <br><br><br>
-<!--CAMPO INFORMACIÓN-->
+<!--CAMPO INFORMACIÓN
 <div class="container">
     <input type="button" name="fileText" id="fileText" value="mostrar información" onclick="mostrarTexto()">
         <div id="helloWorldText" style="display: none;">
@@ -169,6 +235,6 @@
             </div>
             </div>
             
-    </div>
+    </div>-->
 </body>
 </html>

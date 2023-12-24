@@ -102,6 +102,33 @@ class ClaseDao {
             return NULL;
         }
     }
+
+    public function existe_usr($usr,$pass) {
+        try {
+            // Crear una instancia de la clase de conexión
+            $conexionBD = new ConexionBD();
+            
+            // Obtener la conexión
+            $conexion = $conexionBD->getConexion();
+
+            // Preparar la consulta SQL parametrizada
+            $sql = "SELECT * FROM usuarios WHERE pass = :pass and usr = :usr ";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':pass', $pass);
+            $stmt->bindParam(':usr', $usr);
+
+            // Ejecutar la consulta
+            $stmt->execute();
+
+            // Obtener los resultados
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //el resultado es una matriz
+            return $result;
+        } catch (PDOException $e) {
+            // Manejar la excepción de conexión aquí
+            return NULL;
+        }
+    }
     
 }
 /*
