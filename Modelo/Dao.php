@@ -1,6 +1,7 @@
 <?php
 require_once '../util/ConexionBD.php';
 require_once 'Bean.php';
+require_once 'BeanPersonas.php';
 
 class ClaseDao {
 
@@ -112,7 +113,7 @@ class ClaseDao {
             $conexion = $conexionBD->getConexion();
 
             // Preparar la consulta SQL parametrizada
-            $sql = "SELECT * FROM usuarios WHERE pass = :pass and usr = :usr ";
+            $sql = "SELECT * FROM usuarios WHERE pass = :pass and correo = :usr ";
             $stmt = $conexion->prepare($sql);
             $stmt->bindParam(':pass', $pass);
             $stmt->bindParam(':usr', $usr);
@@ -130,6 +131,57 @@ class ClaseDao {
         }
     }
     
+    public function Registrar_usr(BeanPersonas $obj) {
+        $i = 0;
+        try{
+            $conexion = new ConexionBD();
+            $conn = $conexion->getConexion();
+    
+            $stmt = $conn->prepare("INSERT INTO `usuarios` (`codusu`, `nombre`, `apellido`, `correo`,`pass`,`sesion`)
+            VALUES (NULL, :nombre, :apellido, :correo, :pass, 0 );");
+    
+            // Asignar valores a las variables
+            $nombre = $obj->getnombre();
+            $apellido = $obj->getapellido();
+            $correo = $obj->getcorreo();
+            $pass = $obj->getpass() ;
+    
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':apellido', $apellido);
+            $stmt->bindParam(':correo', $correo);
+            $stmt->bindParam(':pass', $pass);              
+            $i =  $stmt->execute();
+            return true;  
+        } catch(Exception $th){
+            // Manejar la excepción, por ejemplo:
+            echo "Error: " . $th->getMessage();
+            return false;
+        } 
+    }
+    public function sesion($usr) {
+        $i = 0;
+        try{
+            $conexion = new ConexionBD();
+            $conn = $conexion->getConexion();
+            $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo = :usr");
+            $stmt->bindParam(':usr', $usr);
+            $stmt->execute();
+            $respuesta=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $val= $respuesta[0]["sesion"] + 1;
+            $stmt = $conn->prepare("UPDATE usuarios
+            SET sesion = :val
+            WHERE correo = :usr;
+            ");
+            $stmt->bindParam(':usr', $usr);
+            $stmt->bindParam(':val', $val);             
+            $i =  $stmt->execute();
+            return true;  
+        } catch(Exception $th){
+            // Manejar la excepción, por ejemplo:
+            echo "Error: " . $th->getMessage();
+            return false;
+        } 
+    }
 }
 /*
 $obj = new ClaseDao();

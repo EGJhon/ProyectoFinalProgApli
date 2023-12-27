@@ -89,6 +89,9 @@ if resultados:
     cursor.execute(consulta)
     consulta = "ALTER TABLE  Datadistri ADD FOREIGN KEY (coddistri) REFERENCES Distritos(coddistri);"
     cursor.execute(consulta)
+    consulta = "create table usuarios(codusu int not null AUTO_INCREMENT,nombre varchar(60),apellido varchar(60),correo varchar(80),pass varchar(8),sesion int,PRIMARY key(codusu))"
+    cursor.execute(consulta)
+
 else:
     consulta = "CREATE DATABASE  DataDistritos;"
     cursor.execute(consulta)
@@ -152,6 +155,9 @@ else:
     consulta = "ALTER TABLE Datadistri  MODIFY COLUMN coddata INT NOT NULL AUTO_INCREMENT;"
     cursor.execute(consulta)
     consulta = "ALTER TABLE  Datadistri ADD FOREIGN KEY (coddistri) REFERENCES Distritos(coddistri);"
+    cursor.execute(consulta)
+
+    consulta = "create table usuarios(codusu int not null AUTO_INCREMENT,nombre varchar(60),apellido varchar(60),correo varchar(80),pass varchar(8),sesion int,PRIMARY key(codusu))"
     cursor.execute(consulta)
 
 # Cerrar el cursor y la conexión

@@ -60,3 +60,14 @@ create table  Datadistri
 );
 ALTER TABLE Datadistri  MODIFY COLUMN coddata INT NOT NULL AUTO_INCREMENT;
 alter table  Datadistri ADD FOREIGN KEY (coddistri) REFERENCES Distritos(coddistri);
+
+
+create table usuarios(
+    codusu int not null AUTO_INCREMENT,
+    nombre varchar(60),
+    apellido varchar(60),
+    correo varchar(80),
+    pass varchar(8),
+    sesion int,
+    PRIMARY key(codusu)
+)

@@ -29,7 +29,6 @@
         document.form.action="controlador/controlador.php"
         document.form.method="POST";
         document.form.op.value="4";
-
         document.form.submit();
       }
     </script>

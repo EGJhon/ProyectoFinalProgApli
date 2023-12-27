@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,30 +24,14 @@
         $("#btn_iniciar").click(function(){  
             $("#form").attr('action','controlador/controlador.php');
             $("#form").attr('method','POST');
-            $('input[name=op]').val('1');
+            $('input[name=op]').val('8');
             $("#form").submit();
         });
         $("#crear-usr").click(function(){  
-            $.ajax({
-              url:"controlador/controlador.php",
-              type:"POST",
-              data: "op=6",
-              success: function(datos){
-                $("body").html(datos);
-                $("#contenedor1").html("");
-              }
-            });
-        });
-        $("#crear-usr").click(function(){  
-            $.ajax({
-              url:"controlador/controlador.php",
-              type:"POST",
-              data: "op=6",
-              success: function(datos){
-                $("body").html(datos);
-                $("#contenedor1").html("");
-              }
-            });
+          $("#form").attr('action','controlador/controlador.php');
+            $("#form").attr('method','POST');
+            $('input[name=op]').val('6');
+            $("#form").submit();
         });
       });
     </script>
