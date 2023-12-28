@@ -5,7 +5,7 @@ conexion = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",
-    database="datadistritos"
+    database="DataDistritos"
 )
 
 # Crear un objeto cursor para ejecutar consultas SQL
@@ -14,7 +14,7 @@ cursor = conexion.cursor()
 # Consulta SQL para insertar datos en la tabla
 consulta = "INSERT INTO Datadistri  VALUES (NULL,%s, %s, %s)"
 
-with open("C:/Users/JHON/Documents/GitHub/ProyectoFinalProgApli/BD/RESIDUOSSOLIDOS_EXT.csv") as f:
+with open("/home/jhon/Documentos/GitHub/ProyectoFinalProgApli/BD/RESIDUOSSOLIDOS_EXT.csv") as f:
     reader = csv.reader(f,delimiter=";")
     distrito=1
     for i in reader:
