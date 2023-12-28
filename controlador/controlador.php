@@ -20,7 +20,7 @@
             $pass=$_POST['pass'];
             $usr=$_POST['correo'];
             if ($obj->existe_usr($usr,$pass)!= NULL) {
-              $obj->sesion($usr);
+                $obj->sesion($usr);
                 header("Location: ../menu.php");
             }
             else{
@@ -30,7 +30,7 @@
         }
 
         case 2:{
-            header("Location: ../prueba.php");
+            header("Location: ../clasificador.php");
             break;
         }
     /*----------------------------------Prediciones---------------------------------------------*/    

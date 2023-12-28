@@ -26,10 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
-    // More API functions here:
-    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
-    // the link to your model provided by Teachable Machine export panel
     const URL = "RedNeuronal/ModeloClasificador/my_model/";
 
     let model, webcam, labelContainer, maxPredictions;
@@ -39,10 +36,6 @@
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
-        // load the model and metadata
-        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-        // or files from your local hard drive
-        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
@@ -87,9 +80,9 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.php">
+  <a class="navbar-brand" href="menu.php">
     <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Bootstrap
+    SmartWastePerú
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -117,7 +110,7 @@
 <section class="cover_detector">
 <div class="titulo">
     <div class="container">
-    <h1>Detector y clasificador de residuos sólidos</h1>
+    <h1>Clasificador de residuos sólidos</h1>
 <p>Creado por</p>
     <ul>
         <li>Christian ManuelRodriguez Chilet</li>
@@ -140,15 +133,7 @@
 </div>
 <br>
 
-<!--UPLOAD IMAGE-->
 <div class="container-sm">
-  <!--
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <label for="fileToUpload">Cargar una imágen</label>
-        <input type="file" name="fileToUpload" id="fileToUpload">
-    </form>
-    <!--<img id="previewImage" src="#" alt="Preview Image" style="display:none;">-->
-    <!--<div id="texto"></div>-->
     <div class="d-flex justify-content-center">
       <div id="webcam-container"></div>
     </div>
@@ -184,57 +169,5 @@
       <small>Universidad nacional Federico Villarreal</small>
     </div>
 </footer>
-
-<br><br><br>
-<!--CAMPO INFORMACIÓN
-<div class="container">
-    <input type="button" name="fileText" id="fileText" value="mostrar información" onclick="mostrarTexto()">
-        <div id="helloWorldText" style="display: none;">
-            <br>
-            <div class="d-flex justify-content-center">
-            <h2>Resultados</h2>
-            <br><br>
-            </div>
-            <div class="d-flex justify-content-center">
-                <table class="table-primary table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Porcentaje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <th scope="row">Cartón</th>
-                    <td>24%</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">Plástico</th>
-                    <td>15%</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">Bolsas plásticas</th>
-                    <td>12%</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">Botellas</th>
-                    <td>17%</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">Papel</th>
-                    <td>15%</td>
-                    </tr>
-                    </tbody>
-                    </tr>
-                    <tr>
-                    <th scope="row">Desperdicios orgánicos</th>
-                    <td>17%</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            </div>
-            
-    </div>-->
 </body>
 </html>

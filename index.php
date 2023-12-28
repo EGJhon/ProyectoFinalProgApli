@@ -45,7 +45,6 @@
 <body>
 <!--Pantalla de inicio-->
 <section class="cover_home">
-
 </section>
 <br>
 <div class="container text-center">

@@ -183,16 +183,4 @@ class ClaseDao {
         } 
     }
 }
-/*
-$obj = new ClaseDao();
-echo $obj->Buscar(3,2021)[0]['Predicion'];
-/*
-/*
-$objBean = new Bean();
-$objBean->setCODDISTRITO(1);
-$objBean->setYEARS(2025);
-$objBean->setPREDICCION(75156.58);
-
-$obj = new ClaseDao();
-$obj->InsertarData($objBean);*/
 ?>
