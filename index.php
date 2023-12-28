@@ -45,6 +45,9 @@
 <body>
 <!--Pantalla de inicio-->
 <section class="cover_home">
+  <div class="container text-center">
+    <h1 class="titulo">SmartWastePerú</h1>
+  </div>
 </section>
 <br>
 <div class="container text-center">

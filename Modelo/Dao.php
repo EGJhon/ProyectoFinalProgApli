@@ -11,7 +11,7 @@ class ClaseDao {
             $conexion = new ConexionBD();
             $conn = $conexion->getConexion();
     
-            $stmt = $conn->prepare("INSERT INTO `datadistri` (`coddata`, `coddistri`, `years`, `Prediccion`)
+            $stmt = $conn->prepare("INSERT INTO `Datadistri` (`coddata`, `coddistri`, `years`, `Prediccion`)
             VALUES (NULL, :coddistrito, :years, :prediccion);");
     
             // Asignar valores a las variables
@@ -60,7 +60,7 @@ class ClaseDao {
             $conexion = $conexionBD->getConexion();
 
             // Preparar la consulta SQL parametrizada
-            $sql = "SELECT * FROM datadistri WHERE coddistri = :coddistri AND years = :years";
+            $sql = "SELECT * FROM Datadistri WHERE coddistri = :coddistri AND years = :years";
             $stmt = $conexion->prepare($sql);
             $stmt->bindParam(':coddistri', $coddistri, PDO::PARAM_INT);
             $stmt->bindParam(':years', $years, PDO::PARAM_INT);
