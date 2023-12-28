@@ -3,7 +3,7 @@ class ConexionBD {
     private $server = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $database = 'Datadistritos';
+    private $database = 'DataDistritos';
 
     public function getConexion() {
         try {
