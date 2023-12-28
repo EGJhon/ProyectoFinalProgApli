@@ -87,7 +87,7 @@ class ClaseDao {
             $conexion = $conexionBD->getConexion();
 
             // Preparar la consulta SQL parametrizada
-            $sql = "SELECT * FROM distritos WHERE coddistri = :coddistri ";
+            $sql = "SELECT * FROM Distritos WHERE coddistri = :coddistri ";
             $stmt = $conexion->prepare($sql);
             $stmt->bindParam(':coddistri', $coddistri, PDO::PARAM_INT);
 

@@ -25,7 +25,7 @@
         var selectedValue = $(this).val();
         $("#imagenDistrito").attr("src", selectedValue);
       });
-      $("#inicio").click(function(){
+      $("#menu").click(function(){
         $("#form").attr('action','controlador/controlador.php');
         $("#form").attr('method','POST');
         $('input[name=op]').val('5');
@@ -114,7 +114,7 @@
 
         <div class="container py-5">
           <center>
-          <button type="button" id="inicio" class="btn btn-primary mx-2">Regresar a inicio</button>
+          <button type="button" id="menu" class="btn btn-primary mx-2">Regresar a Menu</button>
           <button type="button" id="predic" class="btn btn-success mx-2">Nueva predicción</button>  
           </center>
         </div>
