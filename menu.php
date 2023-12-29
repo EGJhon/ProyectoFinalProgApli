@@ -32,6 +32,9 @@
           $('input[name=op]').val('2');
           $("#form").submit();
         });
+        $("#btn-salir").click(function(){
+          location.href="index.php";
+        });
       });
     </script>
     <link rel="stylesheet" href="./styles/styles.css">
@@ -44,6 +47,9 @@
 <body>
 <!--Pantalla de inicio-->
 <section class="cover_home">
+<div id="btn-salir"class="position-fixed" style="top: 10px; right: 10px;">
+    <button class="btn btn-primary" >Cerrar Sesión</button>
+</div>
 <div class="container text-center">
 <h1 class="titulo">MENÚ PRINCIPAL</h1>
 </div>

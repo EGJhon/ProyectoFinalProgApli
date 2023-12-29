@@ -78,7 +78,7 @@
             break;
         }
         case 5:{
-            header("Location: ../index.php");
+            header("Location: ../menu.php");
             break;
         }
         case 6 :{

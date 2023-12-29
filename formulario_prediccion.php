@@ -24,6 +24,9 @@
         var selectedValue = $(this).val();
         $("#imagenDistrito").attr("src", selectedValue);
       });
+      $("#btn-salir").click(function(){
+          location.href="index.php";
+        });
     });
       function predecir(){
         document.form.action="controlador/controlador.php"
@@ -45,6 +48,7 @@
           });
 
           $( "#amount" ).val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider( "values", 1) );
+          
       });
     </script>
 
@@ -58,26 +62,23 @@
 
 <!--BARRA DE NAVEGACIÓN-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div id="btn-salir"class="position-fixed" style="top: 10px; right: 10px;">
+    <button class="btn btn-primary" >Cerrar Sesión</button>
+</div>
   <a class="navbar-brand" href="index.php">
     <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    
+    SmartWastePerú
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="prueba.php">Detector</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="nosotros.php">Sobre nosotros</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+      <li>
+        <a class="nav-link" href="menu.php">Menu</a>
       </li>
     </ul>
   </div>
