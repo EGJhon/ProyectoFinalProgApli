@@ -14,7 +14,7 @@ cursor = conexion.cursor()
 # Consulta SQL para insertar datos en la tabla
 consulta = "INSERT INTO Datadistri  VALUES (NULL,%s, %s, %s)"
 
-with open("/home/jhon/Documentos/GitHub/ProyectoFinalProgApli/BD/RESIDUOSSOLIDOS_EXT.csv") as f:
+with open("C:/Users/JHON/Documents/GitHub/ProyectoFinalProgApli/BD/RESIDUOSSOLIDOS_EXT.csv") as f:
     reader = csv.reader(f,delimiter=";")
     distrito=1
     for i in reader:
