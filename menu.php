@@ -38,7 +38,7 @@
       });
     </script>
     <link rel="stylesheet" href="./styles/styles.css">
-    <script>
+    <script> 
     </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -63,13 +63,17 @@
   <button id="btn_prediccion" type="button" class="btn btn-primary btn-lg">Predicción</button>
 <br>
 <br>
-  <button id="btn_detector" type="button" class="btn btn-primary btn-lg">Detector </button>
+  <button id="btn_detector" type="button" class="btn btn-primary btn-lg">Clasificador </button>
 </div>
 
 <!--lOGO UNFV-->
+<br>
+<br>
+<br>
 <div class="container">
-<img src="images/logo_unfv.jpg" width="10%" height="auto" alt="">
-<img src="images/logo_fiis.jpg" width="20%" height="auto" alt="">
+    <img src="images/logo_unfv.jpg" width="20%" height="auto" alt="" style="float: left;">
+    <img src="images/logo_fiis.jpg" width="30%" height="auto" alt="" style="float: right;">
+    <div style="clear: both;"></div>
 </div>
 
 <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">

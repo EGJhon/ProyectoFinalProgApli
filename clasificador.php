@@ -26,8 +26,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<!--TEACHABLE MACHINE-->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
 <script type="text/javascript">
 
     const URL = "RedNeuronal/ModeloClasificador/my_model/";
@@ -76,7 +78,7 @@
         
     }
 </script>
-
+<!--TEACHABLE MACHINE-->
 
 </head>
 <body>
@@ -108,7 +110,7 @@
 
 
 <section class="cover_detector">
-<div class="titulo">
+<div class="titulo-2">
     <div class="container">
     <h1>Clasificador de residuos sólidos</h1>
 <p>Creado por</p>
@@ -124,13 +126,46 @@
 
 
 <br>
+<!--INSTRUCTIVO--->
+<div class="container">
 
+    <!-- Primera Fila -->
+    <div class="row">
 
-<!--BOTÓN-->
-<div class="container-sm">
-<input type="button" class="btn btn-primary" onclick="iniciar()" VALUE="Comenzar">
-<!--<input type="text" placeholder="Ingresar distrito">-->
+        <!-- Primera Columna (Izquierda) -->
+        <div class="col-md-6">
+          <div class="container p-3 my-3 bg-dark text-white">
+            <h2>¿Cómo se usa?</h2>
+            <p>Dar click en el botón comenza para activar la cámara</p>
+            <p>Recuerde dar perisos al navegador para usar la cámara</p>
+
+            
+            <!--BOTÓN-->
+              <input type="button" class="btn btn-primary" onclick="iniciar()" VALUE="Comenzar">
+              <!--<input type="text" placeholder="Ingresar distrito">-->
+          </div>
+            
+        </div>
+        <!-- Fin de Primera Columna (Izquierda) -->
+
+        <!-- Segunda Columna (Derecha) -->
+        <div class="col-md-6">
+            <div class="container p-3 my-3 border">
+            <h2>Tip</h2>
+            <p>Se recomienda que la cámara esté conectado via USB a la computadora que se usará para la clasificación de residuos sólidos</p>
+            <img src="images/camera.png" width="20%" height="auto" alt="" style="float: center;">
+            </div>
+            
+        </div>
+        <!-- Fin de Segunda Columna (Derecha) -->
+
+    </div>
+    <!-- Fin de Primera Fila -->
+
 </div>
+<!-- Fin de Contenedor -->
+
+
 <br>
 
 <div class="container-sm">
@@ -142,6 +177,7 @@
     </div>
 </div>
 
+<!--MOSTRAR WEBCAM-->
 <script>
     function mostrarTexto(){
         document.getElementById('helloWorldText').style.display = 'block';
