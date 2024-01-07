@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Equipo 1</title>
-    <script src="./js/main.js"></script>
+    <script src="../../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -21,23 +21,23 @@
     <script>
       $(document).ready(function(){
         $("#btn_prediccion").click(function(){
-          $("#form").attr('action','controlador/controlador.php');
+          $("#form").attr('action','../../controlador/controlador.php');
           $("#form").attr('method','POST');
           $('input[name=op]').val('3');
           $("#form").submit();
         });
         $("#btn_detector").click(function(){
-          $("#form").attr('action','controlador/controlador.php');
+          $("#form").attr('action','../../controlador/controlador.php');
           $("#form").attr('method','POST');
           $('input[name=op]').val('2');
           $("#form").submit();
         });
         $("#btn-salir").click(function(){
-          location.href="index.php";
+          location.href="../../index.php";
         });
       });
     </script>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="../../styles/styles.css">
     <script> 
     </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -71,8 +71,8 @@
 <br>
 <br>
 <div class="container">
-    <img src="images/logo_unfv.jpg" width="20%" height="auto" alt="" style="float: left;">
-    <img src="images/logo_fiis.jpg" width="30%" height="auto" alt="" style="float: right;">
+    <img src="../../images/logo_unfv.jpg" width="20%" height="auto" alt="" style="float: left;">
+    <img src="../../images/logo_fiis.jpg" width="30%" height="auto" alt="" style="float: right;">
     <div style="clear: both;"></div>
 </div>
 

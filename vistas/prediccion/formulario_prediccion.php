@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Equipo 1</title>
-    <script src="./js/main.js"></script>
+    <script src="../../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -25,11 +25,12 @@
         $("#imagenDistrito").attr("src", selectedValue);
       });
       $("#btn-salir").click(function(){
-          location.href="index.php";
+          location.href="../../index.php";
         });
     });
+    
       function predecir(){
-        document.form.action="controlador/controlador.php"
+        document.form.action="../../controlador/controlador.php"
         document.form.method="POST";
         document.form.op.value="4";
         document.form.submit();
@@ -52,7 +53,7 @@
       });
     </script>
 
-<link rel="stylesheet" href="./styles/styles.css">
+<link rel="stylesheet" href="../../styles/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -65,8 +66,8 @@
 <div id="btn-salir"class="position-fixed" style="top: 10px; right: 10px;">
     <button class="btn btn-primary" >Cerrar Sesión</button>
 </div>
-  <a class="navbar-brand" href="index.php">
-    <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  <a class="navbar-brand" href="../../index.php">
+    <img src="../../images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
     SmartWastePerú
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +76,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="nosotros.php">Sobre nosotros</a>
+        <a class="nav-link" href="../nosotros/nosotros.php">Sobre nosotros</a>
       </li>
       <li>
-        <a class="nav-link" href="menu.php">Menu</a>
+        <a class="nav-link" href="../menu/menu.php">Menu</a>
       </li>
     </ul>
   </div>
@@ -155,7 +156,7 @@
         <div class="container p-3 my-3 border">
             <h1>Recuerde</h1>
             <p>El rango máximo de predicción es de 5 años</p>
-            <img src="images/logo.png" width="100px" height="auto"  alt="">
+            <img src="../../images/logo.png" width="100px" height="auto"  alt="">
         </div>
     </div>
   </div>

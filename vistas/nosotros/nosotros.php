@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./js/main.js"></script>
+    <script src="../../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--JQUERY-->
     <script>
@@ -14,13 +14,13 @@
         $("#imagenDistrito").attr("src", selectedValue);
       });
       $("#btn-salir").click(function(){
-          location.href="index.php";
+          location.href="../../index.php";
         });
     });
     </script>
 
 
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="../../styles/styles.css">
     <script>
     </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -34,8 +34,8 @@
 <div id="btn-salir"class="position-fixed" style="top: 10px; right: 10px;">
     <button class="btn btn-primary" >Cerrar Sesión</button>
 </div>
-  <a class="navbar-brand" href="index.php">
-    <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  <a class="navbar-brand" href="../../index.php">
+    <img src="../../images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
     SmartWastePerú
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
         </div>
         <div class="col-md-6">
             
-                        <img src="images/logo_unfv.jpg" alt="logo_unfv.jpg" style="width:60%; height:auto;">
+                        <img src="../../images/logo_unfv.jpg" alt="logo_unfv.jpg" style="width:60%; height:auto;">
                         
                     </div>
                 </div>

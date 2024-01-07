@@ -21,7 +21,7 @@
             $usr=$_POST['correo'];
             if ($obj->existe_usr($usr,$pass)!= NULL) {
                 $obj->sesion($usr);
-                header("Location: ../menu.php");
+                header("Location: ../vistas/menu/menu.php");
             }
             else{
                 header("Location: ../index.php");
@@ -30,7 +30,7 @@
         }
 
         case 2:{
-            header("Location: ../clasificador.php");
+            header("Location: ../vistas/clasificador/clasificador.php");
             break;
         }
     /*----------------------------------Prediciones---------------------------------------------*/    
@@ -39,7 +39,7 @@
             $obj = new ClaseDao();
             $lista = $obj->ListarDistritos();
             $_SESSION['listadistritos'] = $lista;
-            header("Location: ../formulario_prediccion.php");
+            header("Location: ../vistas/prediccion/formulario_prediccion.php");
             break;
         }
         
@@ -74,15 +74,15 @@
             $_SESSION['distrito'] = $distrito->distrito($cod);
             $_SESSION['fecha'] = $fecha;
             $_SESSION['data'] = json_encode($lista);
-            header("Location: ../Prediccion.php");
+            header("Location: ../vistas/prediccion/Prediccion.php");
             break;
         }
         case 5:{
-            header("Location: ../menu.php");
+            header("Location: ../vistas/menu/menu.php");
             break;
         }
         case 6 :{
-            header("Location: ../register.php");
+            header("Location: ../vistas/seguridad/register.php");
             break;
         }
         case 7 :{
@@ -108,7 +108,7 @@
           break;
         } 
         case 8: {
-          header("Location: ../login.php");
+          header("Location: ../vistas/seguridad/login.php");
           break;
         } 
     }
