@@ -24,6 +24,7 @@
                 header("Location: ../vistas/menu/menu.php");
             }
             else{
+                echo "<script>Window.alert('la contaseña o el correo es incorrecto');</script>";
                 header("Location: ../index.php");
             }
             break;
@@ -42,7 +43,7 @@
             header("Location: ../vistas/prediccion/formulario_prediccion.php");
             break;
         }
-        
+        /* --------------------------para usar con python------------------------------*/
         case 4:{
             unset($_SESSION['fecha']);
             unset($_SESSION['data']);
@@ -86,30 +87,65 @@
             break;
         }
         case 7 :{
-          unset($_SESSION['nombre']);
-          unset($_SESSION['apellidos']);
-          unset($_SESSION['correo']);
-          unset($_SESSION['pass']);
-          unset($_SESSION['registro']);
-          
-          $nombre=$_POST['nombre'];
-          $apellido=$_POST['apellidos'];
-          $correo=$_POST['correo'];
-          $pass=$_POST['pass'];
+            unset($_SESSION['nombre']);
+            unset($_SESSION['apellidos']);
+            unset($_SESSION['correo']);
+            unset($_SESSION['pass']);
+            unset($_SESSION['registro']);
+            
+            $nombre=$_POST['nombre'];
+            $apellido=$_POST['apellidos'];
+            $correo=$_POST['correo'];
+            $pass=$_POST['pass'];
 
-          $objDao = new ClaseDao();
-          $obj =new BeanPersonas();
-          $obj->setnombre($nombre);
-          $obj->setapellido($apellido);
-          $obj->setcorreo($correo);
-          $obj->setpass($pass);
-          $objDao->Registrar_usr($obj);
-          header("Location: ../index.php");
-          break;
+            $objDao = new ClaseDao();
+            $obj =new BeanPersonas();
+            $obj->setnombre($nombre);
+            $obj->setapellido($apellido);
+            $obj->setcorreo($correo);
+            $obj->setpass($pass);
+            $objDao->Registrar_usr($obj);
+            header("Location: ../index.php");
+            break;
         } 
         case 8: {
-          header("Location: ../vistas/seguridad/login.php");
-          break;
-        } 
+            header("Location: ../vistas/seguridad/login.php");
+            break;
+        }
+        /*Distriro*/
+        case 9:{
+            $cod=$_POST['coddistrito'];
+            $distrito = new ClaseDao();
+            echo $distrito->distrito($cod)[0]["distrito"];
+            break;
+        }
+        /*Buscar*/ 
+        case 10:{
+            unset($_SESSION['fecha']);
+            $cod=$_POST['coddistrito'];
+            $fecha = $_POST['fecha'];
+            $objDao = new ClaseDao();
+            $datapredicion=$objDao->Buscar($cod,$fecha);
+            if( $datapredicion != NULL){
+                echo $datapredicion[0]['Prediccion']; 
+            } 
+            else{
+                echo "no";
+            }
+            break;
+        }
+        /*Guardar*/
+        case 11:{
+            $cod=$_POST['coddistrito'];
+            $fecha = $_POST['fecha'];
+            $datapredicion =$_POST['prediccion'];
+            $objDao = new ClaseDao();
+            $obj = new Bean();
+            $obj->setCODDISTRITO($cod);
+            $obj->setYEARS($fecha);
+            $obj->setPREDICCION($datapredicion);
+            $objDao->InsertarData($obj);
+            break;
+        }
     }
 ?>

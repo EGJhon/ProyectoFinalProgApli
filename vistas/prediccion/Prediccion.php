@@ -1,11 +1,10 @@
 <?php 
   session_start();
-  $data=$_SESSION['data'];
-  $fecha = $_SESSION['fecha'];
+  $codigo=$_POST['coddistrito'];
+  $fecha = $_POST['fecha'];
   $arr = explode('-', $fecha);
   $fechaIni=intval($arr[0]);
   $fechaFin=intval($arr[1]);
-  $nombreDistrito = $_SESSION['distrito'][0]["distrito"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,36 +12,95 @@
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Equipo 1</title>
-    <script src="../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>   
-
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script>
-    $(document).ready(function() {
-      $("#distrito").change(function() {
-        var selectedValue = $(this).val();
-        $("#imagenDistrito").attr("src", selectedValue);
-      });
-      $("#menu").click(function(){
-        $("#form").attr('action','../../controlador/controlador.php');
-        $("#form").attr('method','POST');
-        $('input[name=op]').val('5');
-        $("#form").submit();
-      });
-      $("#predic").click(function(){
-        $("#form").attr('action','../../controlador/controlador.php');
-        $("#form").attr('method','POST');
-        $('input[name=op]').val('3');
-        $("#form").submit();
-      });
-      $("#btn-salir").click(function(){
-          location.href="../../index.php";
+      let modelo;
+      async function predeccir(cod, fech) {
+          // Cargar el modelo si aún no se ha cargado
+          if (!modelo) {
+              try {
+                  let url= "../../RedNeuronal/ModelosDistritos/Modelos/distrito"+cod+"/model.json"
+                  modelo = await tf.loadLayersModel(url);
+              } catch (error) {
+                  console.error("Error al cargar el modelo:", error);
+                  return null;
+              }
+          }
+          
+          const tensor = tf.tensor1d([fech]);
+          const pre = modelo.predict(tensor).dataSync();
+          return pre[0];
+      }
+      var fechaIni=parseInt(<?php echo $fechaIni?>);
+      var fechaFin=parseInt(<?php echo $fechaFin?>);
+      var codigo = <?php echo $codigo?>;
+      var data = [];
+      async function manejarPredicciones() {
+        for (let i = fechaIni; i <= fechaFin ; i++) {
+          let predic = await new Promise((resolve) => {
+            $.ajax({
+                url: "../../controlador/controlador.php",
+                type: "POST",
+                data: { op: "10", coddistrito: codigo, fecha: i },
+                success: function (prediccion) {
+                    resolve(prediccion);
+                },
+                error: function () {
+                    resolve("error"); // O maneja el error de alguna otra manera
+                }
+            });
         });
-    });
+          if(predic!="no"){
+            data[i-fechaIni]= parseFloat(predic);
+          }
+          else{
+            let prediciones = await predeccir(codigo,i);
+            data[i-fechaIni]=prediciones;
+            await $.ajax({
+            url:"../../controlador/controlador.php",
+            type:"POST",
+            data:{op:"11",coddistrito:codigo,fecha:i,prediccion:prediciones},
+            success:function(res){
+              }
+            });
+          }
+        }
+        return data;
+      }
 
-
+      $(document).ready(function() {
+        $.ajax({
+          url:"../../controlador/controlador.php",
+          type:"POST",
+          data:{op:"9",coddistrito:codigo},
+          success:function(distrito){
+            $("#distrito").html(distrito);
+          }
+        });   
+        $("#distrito").change(function() {
+          var selectedValue = $(this).val();
+          $("#imagenDistrito").attr("src", selectedValue);
+        });
+        $("#menu").click(function(){
+          $("#form").attr('action','../../controlador/controlador.php');
+          $("#form").attr('method','POST');
+          $('input[name=op]').val('5');
+          $("#form").submit();
+        });
+        $("#predic").click(function(){
+          $("#form").attr('action','../../controlador/controlador.php');
+          $("#form").attr('method','POST');
+          $('input[name=op]').val('3');
+          $("#form").submit();
+        });
+        $("#btn-salir").click(function(){
+            location.href="../../index.php";
+          });
+        })
     </script>
     <link rel="stylesheet" href="../../styles/styles.css">
 </head>
@@ -75,40 +133,38 @@
         <div class="titulo">
           <div class="container">
             <center>
-              <h1>Predicion del Distrito de <?php echo $nombreDistrito?> del año <?php echo $fechaIni ?> - <?php echo  $fechaFin ?></h1>
+              <h1>Predicion del Distrito de <p id="distrito"></p> del año <?php echo $fechaIni ?> - <?php echo  $fechaFin ?></h1>
             </center>
           </div>
         </div>
         </section>  
           <canvas class="container center py-4" id="myChart" style="width:100%;max-width:700px"></canvas>
-    <!--ChartJS-->
-    <?php 
-        echo '
           <script>
-            years =new Array();
-            for (i =parseInt('.$fechaIni.') ; i <= parseInt('.$fechaFin.'); i++) {
-              years[i- parseInt('.$fechaIni.')] = i;
+
+          years =new Array();
+            for (i =fechaIni ; i <= fechaFin; i++) {
+              years[i- fechaIni] = i;
           }
-              const year = years;
-
-          new Chart("myChart", {
-            type: "line",
-            data: {
-              labels: year,
-              datasets: [{
-                label: "Predicion "+ '.$fechaIni.' + " - " + '.$fechaFin.',
-                data: '.$data.',
-                borderColor: "red",
-                fill: false
-              }]
-            },
-            options: {
-              legend: {display: true}
-            }
-          });
-          </script>'
-        ?> 
-
+          async function grafico(){
+            var datos= await manejarPredicciones();
+            new Chart("myChart", {
+              type: "line",
+              data: {
+                labels: years,
+                datasets: [{
+                  label: "Predicion "+ fechaIni + " - " + fechaFin ,
+                  data: datos,
+                  borderColor: "red",
+                  fill: false
+                }]
+              },
+              options: {
+                legend: {display: true}
+              }
+            });
+          }
+        grafico(); 
+    </script>
         <div class="container py-5">
           <center>
           <button type="button" id="menu" class="btn btn-primary mx-2">Regresar a Menu</button>

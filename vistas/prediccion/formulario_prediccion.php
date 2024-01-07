@@ -28,11 +28,9 @@
           location.href="../../index.php";
         });
     });
-    
       function predecir(){
-        document.form.action="../../controlador/controlador.php"
+        document.form.action="prediccion.php"
         document.form.method="POST";
-        document.form.op.value="4";
         document.form.submit();
       }
     </script>
