@@ -16,11 +16,14 @@
 
     switch ($op){
         case 1:{
+            unset($_SESSION['usr']);
             $obj = new ClaseDao;
             $pass=$_POST['pass'];
             $usr=$_POST['correo'];
-            if ($obj->existe_usr($usr,$pass)!= NULL) {
+            $res=$obj->existe_usr($usr,$pass);
+            if ($res!= NULL) {
                 $obj->sesion($usr);
+                $_SESSION['usr']=$res;
                 header("Location: ../vistas/menu/menu.php");
             }
             else{
@@ -138,13 +141,35 @@
         case 11:{
             $cod=$_POST['coddistrito'];
             $fecha = $_POST['fecha'];
+            $usr=$_SESSION["usr"];
             $datapredicion =$_POST['prediccion'];
             $objDao = new ClaseDao();
             $obj = new Bean();
             $obj->setCODDISTRITO($cod);
             $obj->setYEARS($fecha);
             $obj->setPREDICCION($datapredicion);
-            $objDao->InsertarData($obj);
+            $cod=$objDao->InsertarData($obj);
+            $arr = [$cod,NULL];
+            $objDao->guadarPrediccion($usr,$arr);
+            break;
+        }
+        
+        case 12:{
+            $clase=$_POST['clase'];
+            $usr=$_SESSION["usr"];
+            $lista = $_POST['lista'];
+            $obj = new BeanClasificador();
+            $obj->setprediccion($clase);
+            $obj->settextiles($lista[0]);
+            $obj->setelectronicos($lista[1]);
+            $obj->setvidrios($lista[2]);
+            $obj->setmetales($lista[3]);
+            $obj->setcartonypapel($lista[4]);
+            $obj->setplastico($lista[5]);
+            $objDao = new ClaseDao();
+            $cod=$objDao->InsertarDataClasificacion($obj);
+            $arr = [NULL,$cod];
+            $objDao->guadarPrediccion($usr,$arr);
             break;
         }
     }

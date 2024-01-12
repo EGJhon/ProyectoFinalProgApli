@@ -2,6 +2,7 @@
 require_once '../util/ConexionBD.php';
 require_once 'Bean.php';
 require_once 'BeanPersonas.php';
+require_once 'BeanClasificador.php';
 
 class ClaseDao {
 
@@ -22,14 +23,71 @@ class ClaseDao {
             $stmt->bindParam(':coddistrito', $coddistrito);
             $stmt->bindParam(':years', $years);
             $stmt->bindParam(':prediccion', $predicion);              
-            $i =  $stmt->execute();  
+            $i =  $stmt->execute();
+            $result =  $conn->lastInsertId();  
         } catch(Exception $th){
             // Manejar la excepción, por ejemplo:
             echo "Error: " . $th->getMessage();
         } 
-        return $i;
+        return $result;
     }
 
+
+    public function InsertarDataClasificacion(BeanClasificador $obj){
+        $i = 0;
+        try{
+            $conexion = new ConexionBD();
+            $conn = $conexion->getConexion();
+    
+            $stmt = $conn->prepare("INSERT INTO `dataclasificador`
+            VALUES (NULL, :prediccion, :textiles, :electronicos, :vidrios, :metales, :cartonypapel, :plastico);");
+    
+            // Asignar valores a las variables
+
+            $prediccion = $obj->getprediccion();
+            $textiles = $obj->gettextiles();
+            $electronicos = $obj->getelectronicos();
+            $vidrios = $obj->getvidrios();
+            $metales = $obj->getmetales();
+            $cartonypapel = $obj->getcartonypapel();
+            $plastico = $obj->getplastico();
+
+            $stmt->bindParam(':prediccion', $prediccion);
+            $stmt->bindParam(':textiles', $textiles);
+            $stmt->bindParam(':electronicos', $electronicos);
+            $stmt->bindParam(':vidrios', $vidrios);
+            $stmt->bindParam(':metales', $metales);
+            $stmt->bindParam(':cartonypapel', $cartonypapel);
+            $stmt->bindParam(':plastico', $plastico);
+            
+            $i =  $stmt->execute();
+            $result =  $conn->lastInsertId();  
+        } catch(Exception $th){
+            // Manejar la excepción, por ejemplo:
+            echo "Error: " . $th->getMessage();
+        } 
+        return $result;
+    }
+
+    public function guadarPrediccion($usr,$arr){
+        try{
+            $conexion = new ConexionBD();
+            $conn = $conexion->getConexion();
+    
+            $stmt = $conn->prepare("INSERT INTO `prediccion` 
+            VALUES (NULL, :usr, :coddatadistri,:coddataclasificador);");
+    
+            $stmt->bindParam(':usr', $usr);
+            $stmt->bindParam(':coddatadistri', $arr[0]);
+            $stmt->bindParam(':coddataclasificador', $arr[1]);              
+            $i =  $stmt->execute();
+            $result =  $conn->lastInsertId();  
+        } catch(Exception $th){
+            // Manejar la excepción, por ejemplo:
+            echo "Error: " . $th->getMessage();
+        } 
+        return $result;
+    }
 
     public function ListarDistritos(){
         try { 
@@ -124,7 +182,7 @@ class ClaseDao {
             // Obtener los resultados
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             //el resultado es una matriz
-            return $result;
+            return $result[0]["codusu"];
         } catch (PDOException $e) {
             // Manejar la excepción de conexión aquí
             return NULL;

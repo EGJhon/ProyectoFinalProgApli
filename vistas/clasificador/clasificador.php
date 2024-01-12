@@ -35,7 +35,8 @@
     const URL = "../../RedNeuronal/ModeloClasificador/my_model/";
 
     let model, webcam, labelContainer, maxPredictions;
-
+    let limite = 90;
+    let contador = 0;
     // Load the image model and setup the webcam
     async function iniciar() {
         const modelURL = URL + "model.json";
@@ -57,12 +58,22 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
+    } 
+    async function guardar(clase, lista){
+      $.ajax({
+        url: "../../controlador/controlador.php",
+        type: "POST",
+        data: { op: "12", clase: clase, lista: lista },
+        success: function (data) {
+        }
+      })
     }
-
+    
     async function loop() {
         webcam.update(); // update the webcam frame
         await predict();
         window.requestAnimationFrame(loop);
+        contador++;
     }
 
     // run the webcam image through the image model
@@ -70,12 +81,27 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         let classPrediction='<table class="table-primary table-bordered"><thead><tr><th scope="col">Tipo</th><th scope="col">Porcentaje</th></tr></thead><tbody>';
+        let objetopredict = null;
+        let lista = new Array();
         for (let i = 0; i < maxPredictions; i++) {
-            classPrediction = classPrediction + "<tr><th>"+prediction[i].className+ "</th><td>" + (prediction[i].probability.toFixed(1) *100 )+"%  </td></tr>";
+          let name = prediction[i].className;
+          let porcentage= prediction[i].probability.toFixed(1);
+          lista.push(porcentage);
+            classPrediction = classPrediction + "<tr><th>"+name+ "</th><td>" + (porcentage * 100 )+"%  </td></tr>";
+            if (porcentage >=  0.9) {
+              objetopredict = name;
+            }
         }
+        if(objetopredict != null && contador >= limite){
+          contador=0;
+          console.log(objetopredict);
+          await guardar(objetopredict,lista);
+        }
+
         classPrediction = classPrediction +'</tbody></table>';
         labelContainer.innerHTML = classPrediction  ;
-        
+        predic.innerHTML= "<p>"+objetopredict+"</p>"
+
     }
 </script>
 <!--TEACHABLE MACHINE-->
@@ -171,6 +197,9 @@
 <div class="container-sm">
     <div class="d-flex justify-content-center">
       <div id="webcam-container"></div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div id="predic"></div>
     </div>
     <div class="d-flex justify-content-center">
       <div id="label-container"></div>

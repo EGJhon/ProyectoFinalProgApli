@@ -49,7 +49,26 @@ insert into Distritos values(41,'Surquillo');
 insert into Distritos values(42,'Villa El Salvador');
 insert into Distritos values(43,'Villa María del Triunfo');
 
+create table prediccion(
+    cod int not null AUTO_INCREMENT,
+    codususario int,
+    coddatadistri int,
+    coddataclasificador int,
+    PRIMARY key (cod)
+);
 
+
+create table dataclasificador(
+    coddata int not null AUTO_INCREMENT,
+    prediccion varchar(50),
+    textiles float,
+    electronicos float,
+    vidrios float,
+    metales float,
+    cartonypapel float,
+    plastico float,
+    PRIMARY key (coddata)
+);
 
 create table  Datadistri
 (  coddata int,
@@ -70,4 +89,8 @@ create table usuarios(
     pass varchar(8),
     sesion int,
     PRIMARY key(codusu)
-)
+);
+
+alter table  prediccion ADD FOREIGN KEY (coddatadistri) REFERENCES Datadistri(coddata);
+alter table  prediccion ADD FOREIGN KEY (coddataclasificador) REFERENCES dataclasificador(coddata);
+alter table  prediccion ADD FOREIGN KEY (codususario) REFERENCES usuarios(codusu);
