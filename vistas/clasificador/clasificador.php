@@ -100,7 +100,7 @@
 
         classPrediction = classPrediction +'</tbody></table>';
         labelContainer.innerHTML = classPrediction  ;
-        predic.innerHTML= "<p>"+objetopredict+"</p>"
+        predic1.innerHTML= "<p>"+objetopredict+"</p>"
 
     }
 </script>
@@ -199,7 +199,7 @@
       <div id="webcam-container"></div>
     </div>
     <div class="d-flex justify-content-center">
-      <div id="predic"></div>
+      <div id="predic1"></div>
     </div>
     <div class="d-flex justify-content-center">
       <div id="label-container"></div>
